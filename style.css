@@ -1,0 +1,62 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+
+  font-family: "Roboto", sans-serif;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(./images/bg2.jpg) ;
+  
+}
+.table
+{
+    width: 300px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+}
+#inputname,#inputage,#email
+{
+    border: none;
+    padding: 10px;
+    border-bottom: black 1px solid;
+}
+#gender,#select
+{
+    padding: 10px;
+}
+#save
+{
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 2px;
+    text-align: center;
+    
+}
+#save:hover{
+    background-color:deepskyblue;
+    border: solid 2px ;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#output
+{
+    padding: 5px;
+    background-color: white;
+   
+    border-radius: 10px;
+}
+th,tr
+{
+    border: solid deepskyblue 2px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    
+}

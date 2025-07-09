@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Student Registration Form</h1>
+    <form id="studentForm">
+        <table class="table">
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" placeholder="Enter your name" id="inputname"></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="number" placeholder="Enter your age" id="inputage"></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td id="gender"><input type="radio" name="gender" value="Male">Male
+                  <input type="radio" name="gender" value="Female">Female
+                </td>
+            </tr>
+            <tr>
+                <td>Course:</td>
+                <td >
+                    <select id="select">
+                        <option>Web Development</option>
+                        <option>JavaScript</option>
+                        <option>MERN</option>
+                        <option>Python Programming</option>
+                        <option>Artificial Intelligence</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail:</td>
+                <td><input type="text" placeholder="your e-mail" id="email"></td>
+            </tr>
+            <tr>
+                <td colspan="2" id="save">Save</td>
+            </tr>
+        </table>
+    </form>
+
+    <!-- Output table -->
+   
+     <div id="container" style="padding: 50px;">
+            <table id="output">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Course</th>
+                    <th>E-mail</th>
+                    <th id="action">Action</th>
+                </tr>
+                </thead>
+               <tbody id="tbody"> </tbody>
+            </table>
+
+        </div>
+</body>
+
+<script>
+    //selecting element
+
+    const name=document.getElementById("inputname")
+    const age=document.getElementById("inputage")
+    const course=document.getElementById("select")
+    const email=document.getElementById("email")
+    const btn=document.getElementById("save")
+    
+    btn.addEventListener("click",function(){
+
+        const genderRadio=document.querySelector('input[name="gender"]:checked')
+    const gender = genderRadio ? genderRadio.value : ""
+
+      const newrow=output.insertRow()
+      newrow.insertCell(0).textContent=name.value
+      newrow.insertCell(1).textContent=age.value
+      newrow.insertCell(2).textContent=gender
+      newrow.insertCell(3).textContent=course.value
+      newrow.insertCell(4).textContent=email.value
+      newrow.insertCell(5).innerHTML='<button onclick="deleteRow(this)">Delete</button>'
+      const datatab=document.getElementById("output")
+
+      //button creation
+
+         document.getElementById("studentForm").reset()
+      })
+       
+      
+    function deleteRow(button)
+      {
+        const row=button.closest("tr")
+        row.remove()
+        
+        const tbody = document.getElementById("tbody");
+        if (tbody.children.length === 0) {
+                document.getElementById("output").style.display = "none";
+            }
+      
+        
+      }
+
+
+</script>
+</html>
