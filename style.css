@@ -12,35 +12,41 @@ body{
   background-image: url(./images/bg2.jpg) ;
   
 }
+
 .table
-{
+{ font-weight: 600;
     width: 300px;
     margin: 10px;
     padding: 20px;
     border-radius: 10px;
     background-color: white;
     color: black;
+    box-shadow: lightgrey;
 }
 #inputname,#inputage,#email
 {
     border: none;
     padding: 10px;
+    margin-top: 2px;
     border-bottom: black 1px solid;
 }
 #gender,#select
 {
+    margin-top: 2px;
     padding: 10px;
 }
 #save
 {
+    width: 100%;
     margin-top: 10px;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 5px;
     text-align: center;
+    background-color: deepskyblue;
+    border: none;
     
 }
 #save:hover{
-    background-color:deepskyblue;
     border: solid 2px ;
     border-radius: 10px;
     cursor: pointer;
@@ -49,8 +55,8 @@ body{
 {
     padding: 5px;
     background-color: white;
-   
     border-radius: 10px;
+    /* border: deepskyblue solid 2px; */
 }
 th,tr
 {
@@ -59,4 +65,14 @@ th,tr
     padding: 10px;
     text-align: center;
     
+}
+
+.del
+{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: deepskyblue;
+}
+.del:hover{
+    cursor: pointer;
 }

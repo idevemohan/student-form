@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Form</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <h1>Student Registration Form</h1>
+    <h1>Student Registration Form <i class="fa-solid fa-graduation-cap"></i></h1>
     <form id="studentForm">
         <table class="table">
             <tr>
@@ -23,13 +27,13 @@
             </tr>
             <tr>
                 <td>Gender:</td>
-                <td id="gender"><input type="radio" name="gender" value="Male">Male
-                  <input type="radio" name="gender" value="Female">Female
+                <td id="gender"><input type="radio" name="gender"  style="margin: 5px;" value="Male">Male
+                    <input type="radio" name="gender" value="Female" style="margin: 5px;">Female
                 </td>
             </tr>
             <tr>
                 <td>Course:</td>
-                <td >
+                <td>
                     <select id="select">
                         <option>Web Development</option>
                         <option>JavaScript</option>
@@ -44,73 +48,89 @@
                 <td><input type="text" placeholder="your e-mail" id="email"></td>
             </tr>
             <tr>
-                <td colspan="2" id="save">Save</td>
+                <!-- <td colspan="2" id="save">Save</td> -->
+                <td colspan="2" style="text-align: center;">
+                    <button type="button" id="save">Save</button>
+                </td>
+
             </tr>
         </table>
     </form>
 
     <!-- Output table -->
-   
-     <div id="container" style="padding: 50px;">
-            <table id="output">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Course</th>
-                    <th>E-mail</th>
-                    <th id="action">Action</th>
-                </tr>
-                </thead>
-               <tbody id="tbody"> </tbody>
-            </table>
 
-        </div>
+    <!-- <div id="container" style="padding: 50px;"> -->
+    <table id="output">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>E-mail</th>
+                <th id="action">Action</th>
+            </tr>
+        </thead>
+        <tbody> </tbody>
+    </table>
+
+
 </body>
 
 <script>
     //selecting element
 
-    const name=document.getElementById("inputname")
-    const age=document.getElementById("inputage")
-    const course=document.getElementById("select")
-    const email=document.getElementById("email")
-    const btn=document.getElementById("save")
-    
-    btn.addEventListener("click",function(){
+    const name = document.getElementById("inputname")
+    const age = document.getElementById("inputage")
+    const course = document.getElementById("select")
+    const email = document.getElementById("email")
+    const btn = document.getElementById("save")
+    const datatab = document.getElementById("output")
 
-        const genderRadio=document.querySelector('input[name="gender"]:checked')
-    const gender = genderRadio ? genderRadio.value : ""
+    const tbody = document.querySelector("tbody");
 
-      const newrow=output.insertRow()
-      newrow.insertCell(0).textContent=name.value
-      newrow.insertCell(1).textContent=age.value
-      newrow.insertCell(2).textContent=gender
-      newrow.insertCell(3).textContent=course.value
-      newrow.insertCell(4).textContent=email.value
-      newrow.insertCell(5).innerHTML='<button onclick="deleteRow(this)">Delete</button>'
-      const datatab=document.getElementById("output")
+    btn.addEventListener("click", function () {
 
-      //button creation
 
-         document.getElementById("studentForm").reset()
-      })
-       
-      
-    function deleteRow(button)
-      {
-        const row=button.closest("tr")
-        row.remove()
-        
-        const tbody = document.getElementById("tbody");
-        if (tbody.children.length === 0) {
-                document.getElementById("output").style.display = "none";
-            }
-      
-        
+
+        const genderRadio = document.querySelector('input[name="gender"]:checked')
+        const gender = genderRadio ? genderRadio.value : ""
+
+        const newRow = output.insertRow()
+        newRow.insertCell(0).textContent = name.value
+        newRow.insertCell(1).textContent = age.value
+        newRow.insertCell(2).textContent = gender
+        newRow.insertCell(3).textContent = course.value
+        newRow.insertCell(4).textContent = email.value
+        newRow.insertCell(5).innerHTML = '<button  class="del" onclick="deleteRow(this)">Delete</button>'
+
+        document.getElementById("studentForm").reset();
+
+        if (!name || !age || !email || !gender) {
+        alert("Please fill in all fields.");
+        return;
       }
+
+      
+    })
+
+
+    function deleteRow(button) {
+        const row = button.closest("tr")
+        row.remove()
+
+
+
+
+        if (tbody.children.length === 0) {
+            // document.getElementById("output").style.display = "none";
+            output.style.display = "none";
+
+        }
+
+    }
 
 
 </script>
+
 </html>
