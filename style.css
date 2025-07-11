@@ -15,8 +15,8 @@ body{
 
 .table
 { font-weight: 600;
-    width: 300px;
-    margin: 10px;
+    width: 2%;
+    margin: 20px;
     padding: 20px;
     border-radius: 10px;
     background-color: white;
@@ -28,18 +28,28 @@ body{
     border: none;
     padding: 10px;
     margin-top: 2px;
+    margin-right: 60px;
     border-bottom: black 1px solid;
 }
-#gender,#select
+#select
+{
+    margin-top: 2px;
+    margin-right: 70px;
+    padding: 10px;
+}
+#gender
 {
     margin-top: 2px;
     padding: 10px;
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
 }
 #photo
 {
     padding: 10px;
     margin-top: 2px;
-    margin-inline-start: 70px;
+    margin-left: 10px;
 }
 #save
 {
@@ -81,4 +91,11 @@ th,tr
 }
 .del:hover{
     cursor: pointer;
+}
+
+@media  screen and (max-width:600px) {
+    body{
+        width: 100%;
+    }
+    
 }
