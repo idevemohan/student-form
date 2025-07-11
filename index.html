@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -27,8 +29,8 @@
             </tr>
             <tr>
                 <td>Gender:</td>
-                <td id="gender"><input type="radio" name="gender"  style="margin: 5px;" value="Male">Male
-                    <input type="radio" name="gender" value="Female" style="margin: 5px;">Female
+                <td id="gender"><input type="radio" name="gender" style="margin: 7px;" value="Male">Male
+                    <input type="radio" name="gender" value="Female" style="margin: 7px;">Female
                 </td>
             </tr>
             <tr>
@@ -46,6 +48,10 @@
             <tr>
                 <td>E-mail:</td>
                 <td><input type="text" placeholder="your e-mail" id="email"></td>
+            </tr>
+            <tr>
+                <td>Photo:</td>
+                <td><input type="file" id="photo" accept="image/*"></td>
             </tr>
             <tr>
                 <!-- <td colspan="2" id="save">Save</td> -->
@@ -68,6 +74,7 @@
                 <th>Gender</th>
                 <th>Course</th>
                 <th>E-mail</th>
+                <th>Photo</th>
                 <th id="action">Action</th>
             </tr>
         </thead>
@@ -80,57 +87,80 @@
 <script>
     //selecting element
 
-    const name = document.getElementById("inputname")
-    const age = document.getElementById("inputage")
-    const course = document.getElementById("select")
-    const email = document.getElementById("email")
+    const nameIn = document.getElementById("inputname")
+    const ageIn = document.getElementById("inputage")
+    const courseIn = document.getElementById("select")
+    const emailIn = document.getElementById("email")
     const btn = document.getElementById("save")
+    const photoIn = document.getElementById("photo")
     const datatab = document.getElementById("output")
 
-    const tbody = document.querySelector("tbody");
+    const tbody = document.querySelector("tbody")
+
 
     btn.addEventListener("click", function () {
 
+        const name = nameIn.value.trim()
+        const age = ageIn.value.trim();
+        const genderRadio = document.querySelector('input[name="gender"]:checked');
+        const gender = genderRadio ? genderRadio.value : "";
+        const course = courseIn.value;
+        const email = emailIn.value.trim();
+        const photo = photoIn.files[0];
 
-
-        const genderRadio = document.querySelector('input[name="gender"]:checked')
-        const gender = genderRadio ? genderRadio.value : ""
-
-        const newRow = output.insertRow()
-        newRow.insertCell(0).textContent = name.value
-        newRow.insertCell(1).textContent = age.value
-        newRow.insertCell(2).textContent = gender
-        newRow.insertCell(3).textContent = course.value
-        newRow.insertCell(4).textContent = email.value
-        newRow.insertCell(5).innerHTML = '<button  class="del" onclick="deleteRow(this)">Delete</button>'
-
-        document.getElementById("studentForm").reset();
+        // validation reminder
 
         if (!name || !age || !email || !gender) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      
-    })
-
-
-    function deleteRow(button) {
-        const row = button.closest("tr")
-        row.remove()
-
-
-
-
-        if (tbody.children.length === 0) {
-            // document.getElementById("output").style.display = "none";
-            output.style.display = "none";
-
+            alert("Please fill in all fields.");
+            return;
         }
 
+
+        if (photo) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                createRow(name, age, gender, course, email, e.target.result);
+            };
+            reader.readAsDataURL(photo);
+        } else {
+            createRow(name, age, gender, course, email, null);
+        }
+
+    })
+
+    function createRow(name, age, gender, course, email, imageSrc) {
+        const newRow = output.insertRow();
+        newRow.insertCell(0).textContent = name;
+        newRow.insertCell(1).textContent = age;
+        newRow.insertCell(2).textContent = gender;
+        newRow.insertCell(3).textContent = course;
+        newRow.insertCell(4).textContent = email;
+        newRow.insertCell(5).innerHTML = imageSrc
+            ? `<img src="${imageSrc}" width="50" height="50" style="border-radius:50%;">`
+            : "No Photo";
+        newRow.insertCell(6).innerHTML = '<button class="del" onclick="deleteRow(this)">Delete</button>';
+
+        // Show output table if it was hidden
+        datatab.style.display = "table";
     }
 
+    document.getElementById("studentForm").reset();
 
+    // Function to delete a row
+    function deleteRow(button) {
+        const row = button.closest("tr");
+        row.remove();
+
+        // Hide table 
+        if (tbody.rows.length === 0) {
+            datatab.style.display = "none";
+        }
+    }
+
+    // Initially hide the output table
+    datatab.style.display = "none";
 </script>
+</body>
 
 </html>
+
